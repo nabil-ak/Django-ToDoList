@@ -1,0 +1,36 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<h1>To Do List</h1>
+<hr class="mt-0 mb-4">
+<table class="table align-middle text-white">
+    <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Items</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Open</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in ls_array %}
+        <tr>
+            <th scope="row">{{item.id}}</th>
+            <td>{{item.name}}</td>
+            <td>{{item.item_set.all|length}}</td>
+            <td>
+                <a type="button" class="btn btn-danger btn-sm px-3" href="/delete/{{item.id}}">
+                    <i class="fas fa-times"></i>
+                </a>
+            </td>
+            <td>
+                <a type="button" class="btn btn-success btn-sm px-3" href="/{{item.id}}" role="button">
+                    <i class="fas fa-external-link-alt"></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

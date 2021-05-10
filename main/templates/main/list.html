@@ -1,0 +1,31 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<h3>{{ls.name}}</h3><br>
+<hr class="mt-0 mb-4">
+<form method="post" action="#">
+    {% csrf_token %}
+
+    {% for item in ls.item_set.all %}
+    <div class="form-check mb-4">
+        {% if item.complete == True%}
+        <input class="form-check-input" type="checkbox" , name="c{{item.id}}" , value="clicked" checked>
+        {% else %}
+        <input class="form-check-input" type="checkbox" , name="c{{item.id}}" , value="clicked">
+        {% endif %}
+
+        <!--<input type="text" , value="{{item.text}}" class="form-control" readonly> !-->
+        <label class="form-check-label" for="flexCheckChecked" style="font-size: larger;">
+            {{item.text}}
+        </label>
+    </div>
+
+    {% endfor %}
+    <div class="input-group mb-3 w-25">
+        <button type="submit" , name="newItem" , value="newIem" class="btn btn-success">Add Item</button>
+        <input class="form-control" type="text" , name="text">
+    </div>
+
+    <button type="submit" , name="save" , value="save" class="btn btn-success">Save</button>
+</form>
+{% endblock %}
